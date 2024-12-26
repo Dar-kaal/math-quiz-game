@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Math Quiz Game</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 20px;
+        }
+        button {
+            padding: 10px;
+            margin-top: 10px;
+            font-size: 16px;
+        }
+        #result {
+            margin-top: 20px;
+            font-size: 20px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <h1>Math Quiz Game</h1>
+    <div id="question"></div>
+    <input type="number" id="answer" placeholder="Enter your answer">
+    <button onclick="checkAnswer()">Submit Answer</button>
+    <div id="result"></div>
+    <button onclick="nextQuestion()">Next Question</button>
+
+    <script>
+        let currentQuestion = 0;
+        let score = 0;
+        
+        const questions = [
+            { question: "5 + 3 = ?", answer: 8 },
+            { question: "12 - 4 = ?", answer: 8 },
+            { question: "7 * 6 = ?", answer: 42 },
+            { question: "9 / 3 = ?", answer: 3 }
+        ];
+
+        function displayQuestion() {
+            document.getElementById("question").innerText = questions[currentQuestion].question;
+            document.getElementById("result").innerText = '';
+            document.getElementById("answer").value = '';
+        }
+
+        function checkAnswer() {
+            const userAnswer = parseInt(document.getElementById("answer").value);
+            if (userAnswer === questions[currentQuestion].answer) {
+                score++;
+                document.getElementById("result").innerText = "Correct! Your score is " + score;
+            } else {
+                document.getElementById("result").innerText = "Wrong answer. The correct answer was " + questions[currentQuestion].answer;
+            }
+        }
+
+        function nextQuestion() {
+            currentQuestion++;
+            if (currentQuestion < questions.length) {
+                displayQuestion();
+            } else {
+                document.getElementById("result").innerText = "Game Over! Your total score is " + score;
+            }
+        }
+
+        displayQuestion(); // Initialize first question
+    </script>
+</body>
+</html>
